@@ -36,11 +36,14 @@ export class UploadService {
   }
 
   async doSomething(files: any[]): Promise<any> {
+    files = [
+      'https://res.cloudinary.com/dlth9ls92/image/upload/v1584295155/IMG_0163.jpg',
+    ];
     const basePath = 'src/upload/image-data/face-recognition';
     const imgsPath = path.resolve(basePath, 'imgs');
     const nameMappings = ['ahmet', 'daryl', 'rick', 'negan'];
 
-    console.log('file : ', files);
+    console.log('files : ', files);
 
     let imgFiles = await fs.readdirSync(imgsPath);
     let imagesData = [];
@@ -62,25 +65,6 @@ export class UploadService {
         imagesData.push(el);
       }
     });
-
-    await imgFiles.map(el => {
-      if (el !== '.DS_Store') {
-        fileImagesData.push(el);
-      }
-    });
-
-    // await console.log('imagesData : ', imagesData);
-    const fileImages = await imagesData
-      // get absolute file path
-      .map(file => path.resolve(imgsPath, file))
-      // read image
-      .map(filePath => cv.imread(filePath))
-      // face recognizer works with gray scale images
-      .map(img => img.bgrToGray())
-      // detect and extract face
-      .map(getFaceImage)
-      // face images must be equally sized
-      .map(faceImg => faceImg.resize(80, 80));
 
     // await console.log('imagesData : ', imagesData);
     const images = await imagesData
