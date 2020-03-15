@@ -6,10 +6,17 @@
     "emitDecoratorMetadata": true,
     "experimentalDecorators": true,
     "target": "es2017",
+    "typeRoots": ["node_modules/@types"],
+    "resolveJsonModule": true,
+    "esModuleInterop": true,
+    "lib": ["es2017", "dom"],
     "sourceMap": true,
     "outDir": "./dist",
     "baseUrl": "./",
     "incremental": true
+  },
+  "paths": {
+    "@face-recognition": ["libs/index.ts"]
   },
   "exclude": ["node_modules", "dist"]
 }
